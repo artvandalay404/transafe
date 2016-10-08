@@ -1,13 +1,10 @@
-'use strict';
-
 import React     from 'react';
 import ReactDOM  from 'react-dom';
-
-import Routes    from './Routes';
+import Map from './components/Map.js';
 
 if ( process.env.NODE_ENV !== 'production' ) {
   // Enable React devtools
   window.React = React;
 }
 
-ReactDOM.render(Routes, document.getElementById('app'));
+ReactDOM.render(<Map />, document.getElementById('app'));
