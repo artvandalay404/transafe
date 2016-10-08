@@ -5,7 +5,7 @@ export default class TextField extends Component {
   constructor() {
     super();
     this.state = {
-      value: ''.
+      value: '',
     };
   }
 
@@ -14,10 +14,17 @@ export default class TextField extends Component {
   }
 
   render() {
-    <FormControl
-      bsSize="large"
-      value={this.state.value}
-      onChange={this.handleChange}
+    return (
+      <FormControl
+        bsSize="large"
+        value={this.state.value}
+        onChange={this.handleChange}
+        placeholder={this.props.placeholder}
       />
+    );
   }
 }
+
+TextField.propTypes = {
+  placeholder: React.PropTypes.string,
+};

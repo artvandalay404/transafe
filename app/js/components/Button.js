@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button as BootstrapButton } from 'react-bootstrap';
 
 export default class Button extends Component {
   constructor(props) {
@@ -11,19 +11,19 @@ export default class Button extends Component {
 
   render() {
     return (
-      <Button
+      <BootstrapButton
         disabled={this.state.isLoading}
         bsStyle="primary"
         onClick={this.state.isLoading ? null : this.props.onClick}
         >
         {this.props.text}
-      </Button>
+      </BootstrapButton>
     );
   }
 
 }
 
 Button.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  text: React.PropTypes.string,
+  onClick: React.PropTypes.func,
 };
