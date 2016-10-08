@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import Btn from './Btn';
 import Map from './Map';
 import TextInput from './TextInput';
 
@@ -15,10 +15,10 @@ export default class MapView extends Component {
         <Map />
         <TextInput placeholder="Starting Point" />
         <TextInput placeholder="Destination" />
-        <Button>
-          text="Get Directions"
+        <Btn
           onClick={this.buttonOnClick}
-        </Button>
+          text="Get Directions"
+        />
       </div>
     );
   }
