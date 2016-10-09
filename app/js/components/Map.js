@@ -9,16 +9,18 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lon: -83.046,
-      lat: 42.331,
-      zoom: 11,
-      startDragLngLat: null,
-      isDragging: false,
+      viewport: {
+        longitude: -83.046,
+        latitude: 42.331,
+        zoom: 11,
+        startDragLngLat: null,
+        isDragging: false,
+      },
       coordsShown: [],
       crimes: [],
     };
   }
-
+  
   componentDidMount() {
     api.getAllCrime()
       .then(crimes => {
@@ -37,12 +39,12 @@ export default class Map extends Component {
       return (
         <MapGL width={800}
           height={600}
-          latitude={this.state.lat}
-          longitude={this.state.lon}
+          {...this.state.viewport}
           mapboxApiAccessToken={accessToken}
-          zoom={this.state.zoom} onChangeViewport={(viewport) => {
-            const {latitude, longitude, zoom} = viewport;
-            this.setState({lon: longitude, lat: latitude, zoom: zoom});
+          onChangeViewport={(viewport) => {
+            const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
+
+            this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
           }}
         />
       );
