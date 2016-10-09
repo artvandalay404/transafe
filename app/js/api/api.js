@@ -1,3 +1,4 @@
+/*eslint-disable semi*/
 import axios from 'axios';
 
 export function getAllCrime() {
