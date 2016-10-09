@@ -8,20 +8,14 @@ const styles = {
   mainContainer: {
     textAlign: 'center',
     display: 'block',
-    marginTop:  '3em',
-    marginLeft: '10em',
     marginTop: '1em',
-    backgroundColor: 'transparent',
     marginTop: '-925px',
     position: 'relative',
-    zIndex: '2'
   },
   button: {
     marginTop: '0.25em',
-    width: '6em'
   },
   destination: {
-    width: '60em'
   }
 };
 
@@ -31,6 +25,7 @@ export default class MapView extends Component {
     this.state = {
       startingPoint: '',
       endingPoint: '',
+      routes: {},
     };
   }
 
@@ -62,6 +57,8 @@ export default class MapView extends Component {
 
         console.log("AND HERE ARE YOUR ROUTE STEPS!!!:", routeSteps)
 
+        this.setState({'routes': routeSteps})
+
         return routeSteps
       })
       .catch(err => console.warn('Error in buttonOnClick:', err))
@@ -74,10 +71,10 @@ export default class MapView extends Component {
   render() {
     return (
       <div>
-        <Map />
+        <Map routes={this.state.routes}/>
         <div style={styles.mainContainer} >
           <div style={styles.destination} >
-            <textarea className={styles.destination} onChange={e => this.updateText(e.target.value)} type='text' placeholder='Destination' />
+            <textarea rows='3' cols='50' className={styles.destination} onChange={e => this.updateText(e.target.value)} type='text' placeholder='Destination' />
             <div style={styles.button} >
               <Btn onClick={e => this.buttonOnClick(this.state.endingPoint)} text="Get Directions" />
             </div>
