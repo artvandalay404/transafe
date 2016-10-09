@@ -16,15 +16,12 @@ export function getCenterCoord() {
 }
 
 export function getRoute(currentLoction, destinationLocation) {
-  console.log("Current Location:", currentLoction)
-  console.log("Target Location:", destinationLocation)
+  const cLon = currentLoction[0]
+  const cLat = currentLoction[1]
+  const dLon = destinationLocation[0]
+  const dLat = destinationLocation[1]
 
-  const cLon = currentLoction['lon']
-  const cLat = currentLoction['lat']
-  const dLon = destinationLocation['lon']
-  const dLat = destinationLocation['lat']
-
-  return axios.get('https://api.mapbox.com/directions/v5/mapbox/walking/-73.989%2C40.733%3B-74%2C40.733.json?access_token=pk.eyJ1Ijoic29raWMiLCJhIjoiY2l0N3doaTZ1MGF1ZjJ6bXdkdzIyb3N4MiJ9.F7fsAP4czc7b23oqBML7JA&steps=true')
+  return axios.get(`https://api.mapbox.com/directions/v5/mapbox/walking/${cLon}%2C${cLat}%3B${dLon}%2C${dLat}json?access_token=pk.eyJ1Ijoic29raWMiLCJhIjoiY2l0N3doaTZ1MGF1ZjJ6bXdkdzIyb3N4MiJ9.F7fsAP4czc7b23oqBML7JA&steps=true`)
     .then(res => res.data.routes[0].legs[0].steps)
     .catch(err => console.warn('error: ' + err))
 }
