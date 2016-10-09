@@ -45,8 +45,9 @@ export default class MapView extends Component {
     const address = this.state.endingPoint
     
     api.getRoute()
-      .then(routeSteps => {
-        console.log("start: " + this.state.startingPoint + ", end: " + this.state.endingPoint)
+      .then(response => {
+        const routeSteps = response.legs[0].steps
+
         console.log("here's our steps:", routeSteps)
         return routeSteps
       })
