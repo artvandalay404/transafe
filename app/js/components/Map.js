@@ -40,8 +40,9 @@ export default class Map extends Component {
 
     render() {
       return (
-        <MapGL width={800}
-          height={600}
+        <MapGL
+          width={1300}
+          height={950}
           {...this.state.viewport}
           mapboxApiAccessToken={accessToken}
           onChangeViewport={(viewport) => {
@@ -50,8 +51,8 @@ export default class Map extends Component {
           }}
         >
           <HeatmapOverlay
-            height={600}
-            width={800}
+            height={950}
+            width={1300}
             {...this.state.viewport}
             locations={this.state.crimeCoords} />
         </MapGL>
