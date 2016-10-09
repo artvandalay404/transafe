@@ -15,6 +15,7 @@
     "boilerplate"
   ],
   "devDependencies": {
+    "axios": "^0.14.0",
     "babel-core": "^6.3.15",
     "babel-eslint": "^6.0.4",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",

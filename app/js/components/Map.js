@@ -15,28 +15,11 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    api.getAllCrime()
+    api.getAllCrime2()
       .then(crimes => {
-        console.log('thenning');
-        const features = crimes.map(crime => {
-          console.log('pls happen');
-          return {
-            'type': 'Feature',
-            'properties': {
-              'place': crime.address,
-              'login': crime.address,
-              'lat': crime.lat,
-              'lon': crime.lon,
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [crime.lon, crime.lat],
-            }
-          };
-          console.log(features);
-        });
+        console.log(crimes);
       })
-      .done();
+      .catch(err => console.log("error in componentDidMount:", err))
     }
 
   render() {
