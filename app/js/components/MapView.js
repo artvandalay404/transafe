@@ -46,13 +46,7 @@ export default class MapView extends Component {
     api.getRoute()
       .then(response => {
         const routeSteps = response.legs[0].steps
-<<<<<<< HEAD
-
-        console.log("our steps:", routeSteps)
-
-=======
         console.log("here's our steps:", routeSteps)
->>>>>>> c07877d4348c074402e8379220c35d8e9bbdce33
         return routeSteps
       })
       .catch(err => console.warn('Error in buttonOnClick:', err))
