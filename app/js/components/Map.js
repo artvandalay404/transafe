@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Layer, Feature, ScaleControl, ZoomControl } from 'react-mapbox-gl';
+import MapGL from 'react-map-gl';
 import * as api from '../api/api';
 
 const accessToken = 'pk.eyJ1Ijoic25hbmRhbGEiLCJhIjoiY2l1'
@@ -9,37 +9,42 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: [0,0],
+      lon: -83.046,
+      lat: 42.331,
+      zoom: 11,
+      startDragLngLat: null,
+      isDragging: false,
       coordsShown: [],
+      crimes: [],
     };
   }
 
   componentDidMount() {
-    api.getAllCrime2()
+    api.getAllCrime()
       .then(crimes => {
-        console.log(crimes);
-      })
-      .catch(err => console.log("error in componentDidMount:", err))
-    }
+        this.setState({crimes: crimes});
+      }).catch(err => {
+        console.log('error in componentDidMount:' + err);
+    });
 
-  render() {
-    return (
-      <ReactMapboxGl
-        style="mapbox://styles/mapbox/light-v8"
-        accessToken={accessToken}
-        center={this.state.center}
-        movingMethod="jumpTo"
-        containerStyle={{ height: '100vh', width: '100%' }}>
-
-        <Layer
-          type="fill"
-          paint={{'fill-color': '#6F788A', 'fill-opacity': 0.1}}>
-          <Feature coordinates={this.state.coordsShown}/>
-        </Layer>
-
-        <ScaleControl />
-        <ZoomControl />
-      </ReactMapboxGl>
-    );
+    api.getCenterCoord()
+      .then(center => {
+        this.setState({lon: center.lon, lat: center.lat});
+    });
   }
+
+    render() {
+      return (
+        <MapGL width={800}
+          height={600}
+          latitude={this.state.lat}
+          longitude={this.state.lon}
+          mapboxApiAccessToken={accessToken}
+          zoom={this.state.zoom} onChangeViewport={(viewport) => {
+            const {latitude, longitude, zoom} = viewport;
+            this.setState({lon: longitude, lat: latitude, zoom: zoom});
+          }}
+        />
+      );
+    }
 }

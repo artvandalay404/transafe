@@ -7,7 +7,6 @@ export default class Btn extends Component {
     this.state = {
       isLoading: false,
     };
-    console.log(this.props);
   }
 
   render() {

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Btn from './Btn';
 import Map from './Map';
 import TextInput from './TextInput';
-import request from 'superagent';
+
 
 export default class MapView extends Component {
 
   buttonOnClick() {
-    console.log("D TOWN");
+    console.log('D-TOWN');
   }
 
   render() {
