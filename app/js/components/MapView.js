@@ -42,17 +42,42 @@ export default class MapView extends Component {
   }
 
   buttonOnClick() {
+    console.log("NEEEEEEW STATE:", this.state.endingPoint)
 
-    api.getRoute()
-      .then(response => {
-        const routeSteps = response.legs[0].steps
-        console.log("here's our steps:", routeSteps)
-        return routeSteps
+    const address = this.state.endingPoint
+
+    api.addressToCoords(address)
+      .then(destData => {
+
+        console.log("OUR DEST DATA:", destData)
+
+        destData.features.map(destination => {
+          let destCoords = {}
+
+          if (address === destination['place_name']) {
+            destCoords = {
+              lon: destination.geometry.coordinates[0],
+              lat: destination.geometry.coordinates[1]
+            }
+            console.log("Your address of " + address + " has become: ", destCoords)
+
+          }
+        })
       })
-      .catch(err => console.warn('Error in buttonOnClick:', err))
+
+    // api.getRoute()
+    //   .then(routeSteps => {
+    //     const {distance, duration, name, maneuver} = routeSteps
+
+
+
+    //     return routeSteps
+    //   })
+    //   .catch(err => console.warn('Error in buttonOnClick:', err))
   }
 
   updateText (destination) {
+    console.log(destination)
     this.setState({endingPoint: destination})
   }
 
