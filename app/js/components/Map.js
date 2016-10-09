@@ -22,39 +22,40 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    api.getAllCrime()
-      .then(crimes => {
-        const crimeCoords = crimes.map(crime => {
-          return {longitude: crime.lon, latitude: crime.lat};
-        });
-        this.setState({crimeCoords});
-      }).catch(err => {
-        console.log('error in componentDidMount:' + err);
-    });
+    // api.getAllCrime()
+    //   .then(crimes => {
+    //     const crimeCoords = crimes.map(crime => {
+    //       return {longitude: crime.lon, latitude: crime.lat};
+    //     });
+    //     this.setState({crimeCoords});
+    //   }).catch(err => {
+    //     console.log('error in componentDidMount:' + err);
+    // });
 
-    api.getCenterCoord()
-      .then(center => {
-        this.setState({lon: center.lon, lat: center.lat});
-    });
+    // api.getCenterCoord()
+    //   .then(center => {
+    //     this.setState({lon: center.lon, lat: center.lat});
+    // });
   }
 
-    render() {
-      return (
-        <MapGL width={800}
+  render() {
+    return (
+      <MapGL 
+        height={600}
+        width={1400}
+        {...this.state.viewport}
+        mapboxApiAccessToken={accessToken}
+        onChangeViewport={(viewport) => {
+          const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
+          this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
+        }}
+      >
+        <HeatmapOverlay
           height={600}
+          width={1400}
           {...this.state.viewport}
-          mapboxApiAccessToken={accessToken}
-          onChangeViewport={(viewport) => {
-            const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
-            this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
-          }}
-        >
-          <HeatmapOverlay
-            height={600}
-            width={800}
-            {...this.state.viewport}
-            locations={this.state.crimeCoords} />
-        </MapGL>
-      );
-    }
+          locations={this.state.crimeCoords} />
+      </MapGL>
+    );
+  }
 }
