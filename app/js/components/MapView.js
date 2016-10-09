@@ -44,9 +44,9 @@ export default class MapView extends Component {
   buttonOnClick() {
 
     api.getRoute()
-      .then(routeSteps => {
-        console.log("start: " + this.state.startingPoint + ", end: " + this.state.endingPoint);
-        console.log("here's our steps:", routeSteps);
+      .then(response => {
+        const routeSteps = response.legs[0].steps
+        console.log("here's our steps:", routeSteps)
         return routeSteps
       })
       .catch(err => console.warn('Error in buttonOnClick:', err))

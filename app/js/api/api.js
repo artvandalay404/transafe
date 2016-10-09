@@ -22,6 +22,6 @@ export function getRoute() {
 
 export function addressToCoords(address) {
   return axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1Ijoic29raWMiLCJhIjoiY2l0N3doaTZ1MGF1ZjJ6bXdkdzIyb3N4MiJ9.F7fsAP4czc7b23oqBML7JA&country=us&bbox=-83.3850850099883%2C42.1912129900003%2C-82.913896991592%2C42.4502300099984&autocomplete=true')
-    .then(res => res.data)
-    .catch(err => console.wwarn('error: ' + err))
+    .then(res => res.data.legs[0])
+    .catch(err => console.warn('error: ' + err))
 }
