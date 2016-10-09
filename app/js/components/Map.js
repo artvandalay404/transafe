@@ -38,6 +38,7 @@ export default class Map extends Component {
     // });
   }
 
+<<<<<<< HEAD
   render() {
     return (
       <MapGL 
@@ -58,4 +59,26 @@ export default class Map extends Component {
       </MapGL>
     );
   }
+=======
+    render() {
+      return (
+        <MapGL
+          width={1300}
+          height={950}
+          {...this.state.viewport}
+          mapboxApiAccessToken={accessToken}
+          onChangeViewport={(viewport) => {
+            const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
+            this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
+          }}
+        >
+          <HeatmapOverlay
+            height={950}
+            width={1300}
+            {...this.state.viewport}
+            locations={this.state.crimeCoords} />
+        </MapGL>
+      );
+    }
+>>>>>>> d33fd680146141a9bb0034cadcb6ac921a694800
 }

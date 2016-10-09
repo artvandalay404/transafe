@@ -13,7 +13,7 @@ export default class Btn extends Component {
     return (
       <Button
         disabled={this.state.isLoading}
-        bsStyle="primary"
+        bsStyle="success"
         onClick={this.state.isLoading ? null : this.props.onClick}
         >
         {this.props.text}
