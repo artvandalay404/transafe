@@ -68,8 +68,10 @@
     "build": "NODE_ENV=production ./node_modules/.bin/gulp prod"
   },
   "dependencies": {
+    "r-dom": "^2.3.0",
     "react-bootstrap": "^0.30.5",
     "react-map-gl": "^1.6.1",
+    "react-map-gl-heatmap-overlay": "^1.1.2",
     "react-mapbox-gl": "^0.14.0"
   }
 }
