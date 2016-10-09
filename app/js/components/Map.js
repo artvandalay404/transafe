@@ -1,6 +1,6 @@
+/* eslint-disable semi */
 import React, { Component } from 'react';
 import MapGL from 'react-map-gl';
-import * as api from '../api/api';
 import HeatmapOverlay from 'react-map-gl-heatmap-overlay';
 
 const accessToken = 'pk.eyJ1Ijoic25hbmRhbGEiLCJhIjoiY2l1'
@@ -44,7 +44,7 @@ export default class Map extends Component {
             const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
             this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}})
           }}>
-          
+
           <HeatmapOverlay
             height={950}
             width={1300}
