@@ -41,43 +41,33 @@ export default class MapView extends Component {
     });
   }
 
-  buttonOnClick() {
-    console.log("NEEEEEEW STATE:", this.state.endingPoint)
-
-    const address = this.state.endingPoint
-
+  buttonOnClick(address) {
     api.addressToCoords(address)
       .then(destData => {
-
-        console.log("OUR DEST DATA:", destData)
-
-        destData.features.map(destination => {
+        return destData.features.map(destination => {
           let destCoords = {}
 
           if (address === destination['place_name']) {
-            destCoords = {
-              lon: destination.geometry.coordinates[0],
-              lat: destination.geometry.coordinates[1]
-            }
-            console.log("Your address of " + address + " has become: ", destCoords)
-
+            console.log("WE FOUND WHAT WE ARE LOOKING FOR:", destination.geometry.coordinates)
+            return destination.geometry
           }
-        })
+        })[0]
       })
+      .then((destData) => {
+        const destCoords = destData.coordinates
+        return api.getRoute(this.state.startingPoint, destCoords)
+      })
+      .then(routeSteps => {
+        const {distance, duration, name, maneuver} = routeSteps
 
-    // api.getRoute()
-    //   .then(routeSteps => {
-    //     const {distance, duration, name, maneuver} = routeSteps
+        console.log("AND HERE ARE YOUR ROUTE STEPS!!!:", routeSteps)
 
-
-
-    //     return routeSteps
-    //   })
-    //   .catch(err => console.warn('Error in buttonOnClick:', err))
+        return routeSteps
+      })
+      .catch(err => console.warn('Error in buttonOnClick:', err))
   }
 
   updateText (destination) {
-    console.log(destination)
     this.setState({endingPoint: destination})
   }
 
@@ -89,7 +79,7 @@ export default class MapView extends Component {
           <div style={styles.destination} >
             <textarea className={styles.destination} onChange={e => this.updateText(e.target.value)} type='text' placeholder='Destination' />
             <div style={styles.button} >
-              <Btn onClick={this.buttonOnClick()} text="Get Directions" />
+              <Btn onClick={e => this.buttonOnClick(this.state.endingPoint)} text="Get Directions" />
             </div>
           </div>
         </div>
