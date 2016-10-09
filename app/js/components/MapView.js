@@ -1,7 +1,7 @@
+/* eslint-disable semi, quotes */
 import React, { Component } from 'react';
 import Btn from './Btn';
 import Map from './Map';
-import TextInput from './TextInput';
 import * as api from '../api/api';
 
 const styles = {
@@ -27,29 +27,32 @@ const styles = {
 
 export default class MapView extends Component {
   constructor () {
-    super()
+    super();
     this.state = {
       startingPoint: '',
       endingPoint: '',
-    }
+    };
   }
 
   componentDidMount () {
     api.getCenterCoord()
       .then(center => {
-        this.setState({startingPoint: [center.lon, center.lat]})
-    })
+        this.setState({startingPoint: [center.lon, center.lat]});
+    });
   }
 
   buttonOnClick() {
-    const address = this.state.endingPoint
-    
+
     api.getRoute()
       .then(response => {
         const routeSteps = response.legs[0].steps
+<<<<<<< HEAD
 
         console.log("our steps:", routeSteps)
 
+=======
+        console.log("here's our steps:", routeSteps)
+>>>>>>> c07877d4348c074402e8379220c35d8e9bbdce33
         return routeSteps
       })
       .catch(err => console.warn('Error in buttonOnClick:', err))
@@ -59,7 +62,7 @@ export default class MapView extends Component {
     this.setState({endingPoint: destination})
   }
 
-  render(props) {
+  render() {
     return (
       <div>
         <Map />
