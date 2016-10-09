@@ -31,36 +31,9 @@ export default class Map extends Component {
     //   }).catch(err => {
     //     console.log('error in componentDidMount:' + err);
     // });
-
-    // api.getCenterCoord()
-    //   .then(center => {
-    //     this.setState({lon: center.lon, lat: center.lat});
-    // });
   }
 
-<<<<<<< HEAD
   render() {
-    return (
-      <MapGL 
-        height={600}
-        width={1400}
-        {...this.state.viewport}
-        mapboxApiAccessToken={accessToken}
-        onChangeViewport={(viewport) => {
-          const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
-          this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
-        }}
-      >
-        <HeatmapOverlay
-          height={600}
-          width={1400}
-          {...this.state.viewport}
-          locations={this.state.crimeCoords} />
-      </MapGL>
-    );
-  }
-=======
-    render() {
       return (
         <MapGL
           width={1300}
@@ -69,16 +42,15 @@ export default class Map extends Component {
           mapboxApiAccessToken={accessToken}
           onChangeViewport={(viewport) => {
             const {longitude, latitude, zoom, startDragLngLat, isDragging} = viewport;
-            this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}});
-          }}
-        >
+            this.setState({viewport: {longitude, latitude, zoom, startDragLngLat, isDragging}})
+          }}>
+          
           <HeatmapOverlay
             height={950}
             width={1300}
             {...this.state.viewport}
             locations={this.state.crimeCoords} />
         </MapGL>
-      );
+      )
     }
->>>>>>> d33fd680146141a9bb0034cadcb6ac921a694800
-}
+  }

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Btn from './Btn';
 import Map from './Map';
 import TextInput from './TextInput';
-<<<<<<< HEAD
 import * as api from '../api/api';
-=======
 
 const styles = {
   mainContainer: {
@@ -27,8 +25,6 @@ const styles = {
   }
 };
 
->>>>>>> d33fd680146141a9bb0034cadcb6ac921a694800
-
 export default class MapView extends Component {
   constructor () {
     super()
@@ -41,12 +37,12 @@ export default class MapView extends Component {
   componentDidMount () {
     api.getCenterCoord()
       .then(center => {
-        this.setState({startingPoint: [center.lon, center.lat]});
-    });
+        this.setState({startingPoint: [center.lon, center.lat]})
+    })
   }
 
-  buttonOnClick(address) {
-    
+  buttonOnClick() {
+    const address = this.state.endingPoint
     
     api.getRoute()
       .then(routeSteps => {
@@ -65,25 +61,13 @@ export default class MapView extends Component {
     return (
       <div>
         <Map />
-<<<<<<< HEAD
-        <div>
-          <textarea 
-            onChange={e => this.updateText(e.target.value)}
-            type='text'
-            placeholder='Destination' />
-          <Btn onClick={this.buttonOnClick(e.target.value)} text="Get Directions" />
-=======
         <div style={styles.mainContainer} >
           <div style={styles.destination} >
-            <TextInput placeholder="Destination" />
-              <div style={styles.button} >
-              <Btn
-                onClick={this.buttonOnClick}
-                text="Get Directions"
-              />
-             </div>
+            <textarea className={styles.destination} onChange={e => this.updateText(e.target.value)} type='text' placeholder='Destination' />
+            <div style={styles.button} >
+              <Btn onClick={this.buttonOnClick()} text="Get Directions" />
+            </div>
           </div>
->>>>>>> d33fd680146141a9bb0034cadcb6ac921a694800
         </div>
       </div>
     );
